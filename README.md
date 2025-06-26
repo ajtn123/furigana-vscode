@@ -1,6 +1,6 @@
 # Furigana Inserter for VS Code README
 
-This extension uses [kuroshiro](https://github.com/hexenq/kuroshiro) to automatically insert furigana for Japanese kanji in various format.
+This extension uses [kuroshiro](https://github.com/hexenq/kuroshiro) to automatically insert furigana for Japanese kanji in various formats.
 
 ## Setting
 
