@@ -2,7 +2,7 @@
   "name": "furigana-vscode",
   "displayName": "Furigana Inserter",
   "description": "Insert furigana automatically.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "AoiCoco",
   "repository": {
     "url": "https://github.com/ajtn123/furigana-vscode"
@@ -25,7 +25,7 @@
     "keybindings": [
       {
         "command": "furigana-vscode.insertFurigana",
-        "key": "Ctrl+F G"
+        "key": "Ctrl+oem_7"
       }
     ],
     "configuration": {
