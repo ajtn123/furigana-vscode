@@ -1,7 +1,7 @@
 {
   "name": "furigana-vscode",
-  "displayName": "furigana-vscode",
-  "description": "Add furigana automatically.",
+  "displayName": "Furigana Inserter",
+  "description": "Insert furigana automatically.",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.101.0"
@@ -23,7 +23,53 @@
         "command": "furigana-vscode.insertFurigana",
         "key": "Ctrl+F G"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Furigana Inserter",
+      "properties": {
+        "furigana-vscode.kuroshiro.to": {
+          "type": "string",
+          "enum": [
+            "hiragana",
+            "katakana",
+            "romaji"
+          ],
+          "default": "hiragana",
+          "description": "Kuroshiro: Target syllabary"
+        },
+        "furigana-vscode.kuroshiro.mode": {
+          "type": "string",
+          "enum": [
+            "normal",
+            "spaced",
+            "okurigana",
+            "furigana"
+          ],
+          "default": "okurigana",
+          "description": "Kuroshiro: Convert mode"
+        },
+        "furigana-vscode.kuroshiro.romajiSystem": {
+          "type": "string",
+          "enum": [
+            "nippon",
+            "passport",
+            "hepburn"
+          ],
+          "default": "hepburn",
+          "description": "Kuroshiro: Romanization system"
+        },
+        "furigana-vscode.kuroshiro.delimiter_start": {
+          "type": "string",
+          "default": "{",
+          "description": "Kuroshiro: Delimiter(Start)"
+        },
+        "furigana-vscode.kuroshiro.delimiter_end": {
+          "type": "string",
+          "default": "}",
+          "description": "Kuroshiro: Delimiter(End)"
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",

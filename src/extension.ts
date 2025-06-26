@@ -51,12 +51,9 @@ async function processString(input: string): Promise<string | undefined> {
     return;
   }
 
-  const result: string = await kuroshiro.convert(input, {
-    to: 'hiragana', // hiragana / katakana / romaji
-    mode: 'okurigana', // normal / spaced / okurigana / furigana
-    delimiter_start: '{',
-    delimiter_end: '}',
-  });
+  const settings = getUserSettings();
+
+  const result: string = await kuroshiro.convert(input, settings.kuroshiro);
 
   return result;
 }
@@ -93,5 +90,18 @@ async function ensureInitialized() {
     await kuroshiro.init(new KuromojiAnalyzer());
     initialized = true;
   }
+}
+
+function getUserSettings() {
+  const config = vscode.workspace.getConfiguration('furigana-vscode');
+  return {
+    kuroshiro: {
+      to: config.get<'hiragana' | 'katakana' | 'romaji'>('furigana-vscode.kuroshiro.to', 'hiragana'),
+      mode: config.get<'normal' | 'spaced' | 'okurigana' | 'furigana'>('furigana-vscode.kuroshiro.mode', 'okurigana'),
+      romajiSystem: config.get<'nippon' | 'passport' | 'hepburn'>('furigana-vscode.kuroshiro.romajiSystem', 'hepburn'),
+      delimiter_start: config.get<string>('furigana-vscode.kuroshiro.delimiter_start', '{'),
+      delimiter_end: config.get<string>('furigana-vscode.kuroshiro.delimiter_end', '}'),
+    },
+  };
 }
 

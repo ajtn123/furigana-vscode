@@ -1,71 +1,40 @@
-# furigana-vscode README
+# Furigana Inserter for VS Code README
 
-This is the README for your extension "furigana-vscode". After writing up a brief description, we recommend including the following sections.
+This extension uses [kuroshiro](https://github.com/hexenq/kuroshiro) to automatically insert furigana for Japanese kanji in various format.
 
-## Features
+## Setting
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+Properties under `furigana-vscode.kuroshiro` are directly passed to kuroshiro converter. You can check its documentation [here](https://github.com/hexenq/kuroshiro?tab=readme-ov-file#api).
 
-For example if there is an image subfolder under your extension project workspace:
+| Options         | Type   | Default     | Description                                                |
+| --------------- | ------ | ----------- | ---------------------------------------------------------- |
+| to              | String | "hiragana"  | Target syllabary [`hiragana`, `katakana`, `romaji`]        |
+| mode            | String | "okurigana" | Convert mode [`normal`, `spaced`, `okurigana`, `furigana`] |
+| romajiSystem\*  | String | "hepburn"   | Romanization system [`nippon`, `passport`, `hepburn`]      |
+| delimiter_start | String | "{"         | Delimiter(Start)                                           |
+| delimiter_end   | String | "}"         | Delimiter(End)                                             |
 
-\!\[feature X\]\(images/feature-x.png\)
+\*: Param romajiSystem is only applied when the value of param to is romaji. For more about it, check Romanization System
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+感じ取れたら手を繋ごう、重なるのは人生のライン and レミリア最高！
 
-## Requirements
+```
+mode:"normal"
+result：かんじとれたらてをつなごう、かさなるのはじんせいのライン and レミリアさいこう！
+```
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+```
+mode:"spaced"
+result：かんじとれ たら て を つなご う 、 かさなる の は じんせい の ライン   and   レミ リア さいこう ！
+```
 
-## Extension Settings
+```
+mode:"okurigana"
+result: 感{かん}じ取{と}れたら手{て}を繋{つな}ごう、重{かさ}なるのは人生{じんせい}のライン and レミリア最高{さいこう}！
+```
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+```
+mode:"furigana"
+result: <ruby>感<rp>{</rp><rt>かん</rt><rp>}</rp></ruby>じ<ruby>取<rp>{</rp><rt>と</rt><rp>}</rp></ruby>れたら<ruby>手<rp>{</rp><rt>て</rt><rp>}</rp></ruby>を<ruby>繋<rp>{</rp><rt>つな</rt><rp>}</rp></ruby>ごう、<ruby>重<rp>{</rp><rt>かさ</rt><rp>}</rp></ruby>なるのは<ruby>人生<rp>{</rp><rt>じんせい</rt><rp>}</rp></ruby>のライン and レミリア<ruby>最高<rp>{</rp><rt>さいこう</rt><rp>}</rp></ruby>！
+```
 
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
