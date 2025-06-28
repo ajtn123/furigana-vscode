@@ -4,7 +4,7 @@ kuroshiro is a Japanese language library for converting Japanese sentence to Hir
 
 This extension uses [kuroshiro](https://github.com/hexenq/kuroshiro) to automatically convert selected Japanese text.
 
-`Kuroshiro: Convert selected text` command or `Ctrl+'` keybinding are available.
+`Kuroshiro: Convert selected text` command and `Ctrl+'` keybinding are available.
 
 ## Setting
 
