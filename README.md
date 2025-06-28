@@ -1,20 +1,26 @@
-# Furigana Inserter for VS Code README
+# Kuroshiro for VSCode
 
-This extension uses [kuroshiro](https://github.com/hexenq/kuroshiro) to automatically insert furigana for Japanese kanji in various formats.
+kuroshiro is a Japanese language library for converting Japanese sentence to Hiragana, Katakana or Romaji with furigana and okurigana modes supported.
+
+This extension uses [kuroshiro](https://github.com/hexenq/kuroshiro) to automatically convert selected Japanese text.
+
+`Kuroshiro: Convert selected text` command or `Ctrl+'` keybinding are available.
 
 ## Setting
 
-Properties under `furigana-vscode.kuroshiro` are directly passed to kuroshiro converter. You can check its documentation [here](https://github.com/hexenq/kuroshiro?tab=readme-ov-file#api).
+Properties under `furigana-vscode.kuroshiro` are directly passed to kuroshiro. You can check its documentation [here](https://github.com/hexenq/kuroshiro?tab=readme-ov-file#api).
 
 | Options         | Type   | Default     | Description                                                |
 | --------------- | ------ | ----------- | ---------------------------------------------------------- |
 | to              | String | "hiragana"  | Target syllabary [`hiragana`, `katakana`, `romaji`]        |
 | mode            | String | "okurigana" | Convert mode [`normal`, `spaced`, `okurigana`, `furigana`] |
 | romajiSystem\*  | String | "hepburn"   | Romanization system [`nippon`, `passport`, `hepburn`]      |
-| delimiter_start | String | "{"         | Delimiter(Start)                                           |
-| delimiter_end   | String | "}"         | Delimiter(End)                                             |
+| delimiter_start | String | "{"         | Delimiter (Start)                                          |
+| delimiter_end   | String | "}"         | Delimiter (End)                                            |
 
 \*: Param romajiSystem is only applied when the value of param to is romaji. For more about it, check Romanization System
+
+## Demo
 
 感じ取れたら手を繋ごう、重なるのは人生のライン and レミリア最高！
 

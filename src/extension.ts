@@ -7,7 +7,7 @@ import KuromojiAnalyzer from 'kuroshiro-analyzer-kuromoji';
 export function activate(context: vscode.ExtensionContext) {
   console.log('furigana-vscode is activated.');
 
-  const disposable = vscode.commands.registerCommand('furigana-vscode.insertFurigana', insertFurigana);
+  const disposable = vscode.commands.registerCommand('furigana-vscode.convertSelected', convertSelected);
 
   context.subscriptions.push(disposable);
   root = context.extensionPath;
@@ -15,7 +15,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 export function deactivate() {}
 
-async function insertFurigana() {
+async function convertSelected() {
   const editor = vscode.window.activeTextEditor;
   if (!editor) {
     vscode.window.showInformationMessage('No active editor.');

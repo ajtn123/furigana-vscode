@@ -1,5 +1,9 @@
 # Change Log
 
+## [1.0.1]
+
+- Updated display name
+
 ## [1.0.0]
 
 - Removed unnecessary files

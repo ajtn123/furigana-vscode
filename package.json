@@ -1,8 +1,8 @@
 {
   "name": "furigana-vscode",
-  "displayName": "Furigana Inserter",
-  "description": "Insert furigana automatically.",
-  "version": "1.0.0",
+  "displayName": "Kuroshiro for VSCode",
+  "description": "kuroshiro is a Japanese language library for converting Japanese sentence to Hiragana, Katakana or Romaji with furigana and okurigana modes supported.",
+  "version": "1.0.1",
   "publisher": "AoiCoco",
   "author": "Aoi",
   "license": "MIT",
@@ -21,7 +21,12 @@
   ],
   "keywords": [
     "kuroshiro",
+    "kuromoji",
     "furigana",
+    "okurigana",
+    "romaji",
+    "hiragana",
+    "katakana",
     "ruby",
     "Japanese",
     "html",
@@ -32,19 +37,20 @@
   "contributes": {
     "commands": [
       {
-        "command": "furigana-vscode.insertFurigana",
-        "title": "Insert Furigana"
+        "command": "furigana-vscode.convertSelected",
+        "category": "Kuroshiro",
+        "title": "Convert selected text"
       }
     ],
     "keybindings": [
       {
-        "command": "furigana-vscode.insertFurigana",
+        "command": "furigana-vscode.convertSelected",
         "key": "Ctrl+oem_7"
       }
     ],
     "configuration": {
       "type": "object",
-      "title": "Furigana Inserter",
+      "title": "Kuroshiro for VSCode",
       "properties": {
         "furigana-vscode.kuroshiro": {
           "type": "object",
