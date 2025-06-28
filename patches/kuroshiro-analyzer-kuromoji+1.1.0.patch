@@ -1,0 +1,14 @@
+diff --git a/node_modules/kuroshiro-analyzer-kuromoji/lib/index.js b/node_modules/kuroshiro-analyzer-kuromoji/lib/index.js
+index b97fc1b..b1db321 100644
+--- a/node_modules/kuroshiro-analyzer-kuromoji/lib/index.js
++++ b/node_modules/kuroshiro-analyzer-kuromoji/lib/index.js
+@@ -40,7 +40,8 @@ var Analyzer = function () {
+         this._analyzer = null;
+ 
+         if (!dictPath) {
+-            if (isNode) this._dictPath = require.resolve("kuromoji").replace(/src(?!.*src).*/, "dict/");else this._dictPath = "node_modules/kuromoji/dict/";
++            // if (isNode) this._dictPath = require.resolve("kuromoji").replace(/src(?!.*src).*/, "dict/");else this._dictPath = "node_modules/kuromoji/dict/";
++            throw new Error('No dictPath is passed')
+         } else {
+             this._dictPath = dictPath;
+         }

@@ -2,9 +2,12 @@
   "name": "furigana-vscode",
   "displayName": "Furigana Inserter",
   "description": "Insert furigana automatically.",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "publisher": "AoiCoco",
+  "author": "Aoi",
+  "license": "MIT",
   "repository": {
+    "type": "git",
     "url": "https://github.com/ajtn123/furigana-vscode"
   },
   "engines": {
@@ -13,8 +16,19 @@
   "categories": [
     "Other"
   ],
+  "extensionKind": [
+    "workspace"
+  ],
+  "keywords": [
+    "kuroshiro",
+    "furigana",
+    "ruby",
+    "Japanese",
+    "html",
+    "markdown"
+  ],
   "activationEvents": [],
-  "main": "./out/extension.js",
+  "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
@@ -29,59 +43,78 @@
       }
     ],
     "configuration": {
+      "type": "object",
       "title": "Furigana Inserter",
       "properties": {
-        "furigana-vscode.kuroshiro.to": {
-          "type": "string",
-          "enum": [
-            "hiragana",
-            "katakana",
-            "romaji"
-          ],
-          "default": "hiragana",
-          "description": "Kuroshiro: Target syllabary"
-        },
-        "furigana-vscode.kuroshiro.mode": {
-          "type": "string",
-          "enum": [
-            "normal",
-            "spaced",
-            "okurigana",
-            "furigana"
-          ],
-          "default": "okurigana",
-          "description": "Kuroshiro: Convert mode"
-        },
-        "furigana-vscode.kuroshiro.romajiSystem": {
-          "type": "string",
-          "enum": [
-            "nippon",
-            "passport",
-            "hepburn"
-          ],
-          "default": "hepburn",
-          "description": "Kuroshiro: Romanization system"
-        },
-        "furigana-vscode.kuroshiro.delimiter_start": {
-          "type": "string",
-          "default": "{",
-          "description": "Kuroshiro: Delimiter(Start)"
-        },
-        "furigana-vscode.kuroshiro.delimiter_end": {
-          "type": "string",
-          "default": "}",
-          "description": "Kuroshiro: Delimiter(End)"
+        "furigana-vscode.kuroshiro": {
+          "type": "object",
+          "default": {
+            "to": "hiragana",
+            "mode": "okurigana",
+            "romajiSystem": "hepburn",
+            "delimiter_start": "{",
+            "delimiter_end": "}"
+          },
+          "properties": {
+            "to": {
+              "type": "string",
+              "enum": [
+                "hiragana",
+                "katakana",
+                "romaji"
+              ],
+              "default": "hiragana",
+              "description": "Target syllabary"
+            },
+            "mode": {
+              "type": "string",
+              "enum": [
+                "normal",
+                "spaced",
+                "okurigana",
+                "furigana"
+              ],
+              "default": "okurigana",
+              "description": "Convert mode"
+            },
+            "romajiSystem": {
+              "type": "string",
+              "enum": [
+                "nippon",
+                "passport",
+                "hepburn"
+              ],
+              "default": "hepburn",
+              "description": "Romanization system"
+            },
+            "delimiter_start": {
+              "type": "string",
+              "default": "{",
+              "description": "Delimiter (Start)"
+            },
+            "delimiter_end": {
+              "type": "string",
+              "default": "}",
+              "description": "Delimiter (End)"
+            }
+          },
+          "description": "Kuroshiro options"
         }
       }
     }
   },
   "scripts": {
-    "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
+    "postinstall": "patch-package",
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src",
-    "test": "vscode-test"
+    "test": "vscode-test",
+    "compile": "npm run check-types && node esbuild.js",
+    "check-types": "tsc --noEmit",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "vscode:prepublish": "npm run package",
+    "package": "npm run check-types && node esbuild.js --production"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
@@ -91,7 +124,9 @@
     "@typescript-eslint/parser": "^8.31.1",
     "@vscode/test-cli": "^0.0.10",
     "@vscode/test-electron": "^2.5.2",
+    "esbuild": "^0.25.5",
     "eslint": "^9.25.1",
+    "patch-package": "^8.0.0",
     "typescript": "^5.8.3"
   },
   "dependencies": {

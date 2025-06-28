@@ -10,6 +10,7 @@ export function activate(context: vscode.ExtensionContext) {
   const disposable = vscode.commands.registerCommand('furigana-vscode.insertFurigana', insertFurigana);
 
   context.subscriptions.push(disposable);
+  root = context.extensionPath;
 }
 
 export function deactivate() {}
@@ -84,10 +85,11 @@ function getSelection(editor: vscode.TextEditor): vscode.Range {
 
 const kuroshiro = new Kuroshiro();
 let initialized = false;
+let root: string | undefined = undefined;
 
 async function ensureInitialized() {
   if (!initialized) {
-    await kuroshiro.init(new KuromojiAnalyzer());
+    await kuroshiro.init(new KuromojiAnalyzer({ dictPath: root + '/dict/' }));
     initialized = true;
   }
 }
@@ -95,13 +97,14 @@ async function ensureInitialized() {
 function getUserSettings() {
   const config = vscode.workspace.getConfiguration('furigana-vscode');
   return {
-    kuroshiro: {
-      to: config.get<'hiragana' | 'katakana' | 'romaji'>('furigana-vscode.kuroshiro.to', 'hiragana'),
-      mode: config.get<'normal' | 'spaced' | 'okurigana' | 'furigana'>('furigana-vscode.kuroshiro.mode', 'okurigana'),
-      romajiSystem: config.get<'nippon' | 'passport' | 'hepburn'>('furigana-vscode.kuroshiro.romajiSystem', 'hepburn'),
-      delimiter_start: config.get<string>('furigana-vscode.kuroshiro.delimiter_start', '{'),
-      delimiter_end: config.get<string>('furigana-vscode.kuroshiro.delimiter_end', '}'),
-    },
+    kuroshiro: { ...new Config(), ...config.get<Partial<Config>>('kuroshiro', {}) },
   };
 }
 
+class Config {
+  to: 'hiragana' | 'katakana' | 'romaji' = 'hiragana';
+  mode: 'normal' | 'spaced' | 'okurigana' | 'furigana' = 'okurigana';
+  romajiSystem: 'nippon' | 'passport' | 'hepburn' = 'hepburn';
+  delimiter_start: string = '{';
+  delimiter_end: string = '}';
+}
